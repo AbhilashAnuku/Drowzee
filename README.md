@@ -29,6 +29,7 @@ This project provides an **interactive learning management system (LMS)** integr
 ---
 
 ## Project Structure  
+```bash
 📂 Final Year Project
 │
 ├── 📂 static
@@ -45,16 +46,3 @@ This project provides an **interactive learning management system (LMS)** integr
 ├── users.db # SQLite database
 ├── requirements.txt
 └── README.md 
-
----
-
-## Installation and Setup  
-
-Install Dependencies  
-Make sure Python is installed on your system. Install all the required dependencies using the following command:
-
-```bash
-pip install -r requirements.txt
-
-```bash
-py app.py
