@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<div class="text-center" id='container'>
+    <h1>Kuppam Engineering College</h1>
+    <img id='video_feed' src="{{ url_for('video_feed') }}">
+    <div id='controls' class="d-flex justify-content-center mt-3">
+        <button id='start_btn' class='btn btn-primary rounded-0 me-2' type="submit" onclick="stream()">START</button>
+        <button disabled="disabled" id='stop_btn' class="btn btn-danger rounded-0 me-2" type="submit" onclick="stop()">STOP</button>
+        <button id='restart_btn' class="btn btn-secondary rounded-0" type="submit" onclick="restart_cam()">RESTART CAM</button>
+    </div>
+    <p class="mt-2" id='status'></p>
+</div>
+{% endblock %}

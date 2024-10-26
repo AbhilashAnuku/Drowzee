@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learning Management System</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css') }}">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{{url_for('index')}}">Learning Management System</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav ms-auto">
+                {% if user %}
+                <li class="nav-item">
+                    <span class="nav-link">Welcome, {{ user.username }}</span>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
+                </li>
+                {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('login') }}">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('register') }}">Register</a>
+                </li>
+                {% endif %}
+            </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4 d-flex justify-content-center">
+        {% block body %}{% endblock %}
+    </div>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="{{ url_for('static', filename='bootstrap.bundle.min.js') }}"></script>
+    <!-- jQuery -->
+    <script src="{{ url_for('static', filename='jquery.min.js') }}"></script>
+    <!-- Ajax Play Sound Plugin -->
+    <script src="{{ url_for('static', filename='jquery.playSound.js') }}"></script>
+    <script type="text/javascript">
+        function stream() {
+            $.ajax({
+                type: 'POST',
+                url: "{{ url_for('start') }}",
+                success: function(data) {
+                    document.getElementById("status").innerHTML = data;
+                    $('#start_btn').attr("disabled", "disabled");
+                    $('#stop_btn').removeAttr("disabled");
+                },
+                error: function(error) {
+                    console.error(error);
+                }
+            });
+        };
+
+        function stop() {
+            $.ajax({
+                type: 'POST',
+                url: "{{ url_for('stop') }}",
+                success: function(data) {
+                    document.getElementById("status").innerHTML = data;
+                    $('#stop_btn').attr("disabled", "disabled");
+                    $('#start_btn').removeAttr("disabled");
+                },
+                error: function() {
+                    console.error("Error occurred during stop operation");
+                }
+            });
+        };
+
+        function restart_cam() {
+            $.ajax({
+                type: 'post',
+                url: "{{ url_for('restart') }}",
+                success: function(data) {
+                    document.getElementById("status").innerHTML = data;
+                },
+                error: function(data) {
+                    alert(JSON.stringify(data.status))
+                }
+            });
+        };
+         // Function to handle registration form submission via AJAX
+         function register() {
+            $.ajax({
+                type: 'POST',
+                url: "{{ url_for('register') }}",
+                data: $('#registerForm').serialize(), // Serialize form data
+                success: function(response) {
+                    // Handle successful registration
+                    console.log(response);
+                    alert("Registration successful! Please login to continue.");
+                    window.location.href = "{{ url_for('login') }}"; // Redirect to login page
+                },
+                error: function(error) {
+                    // Handle registration error
+                    console.error("Error occurred during registration:", error.responseText);
+                    alert("Registration failed. Please try again.");
+                }
+            });
+        }
+
+        // Function to handle login form submission via AJAX
+        function login() {
+            $.ajax({
+                type: 'POST',
+                url: "{{ url_for('login') }}",
+                data: $('#loginForm').serialize(), // Serialize form data
+                success: function(response) {
+                    // Handle successful login
+                    console.log(response);
+                    window.location.href = "{{ url_for('index') }}"; // Redirect to home page
+                },
+                error: function(error) {
+                    // Handle login error
+                    console.error("Error occurred during login:", error.responseText);
+                    alert("Invalid username or password. Please try again.");
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>
