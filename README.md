@@ -3,7 +3,7 @@
 ## Interactive Preparation and Drowsiness Tracking Platform for Students(LMS)
 
 ### Overview  
-This project provides an **interactive learning management system (LMS)** integrated with a **drowsiness detection mechanism**. It is designed to enhance student engagement, track fatigue during study sessions, and ensure effective preparation for academic goals. The platform incorporates both **video streaming** and **user authentication** for personalized usage.
+This project provides an **Interactive Learning Management System (LMS)** integrated with a **drowsiness detection mechanism**. It is designed to enhance student engagement, track fatigue during study sessions, and ensure effective preparation for academic goals. The platform incorporates both **video streaming** and **user authentication** for personalized usage.
 
 ---
 
