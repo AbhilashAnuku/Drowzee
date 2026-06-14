@@ -1,48 +1,90 @@
 # Drowzee
-# Final Year Project  
-## Interactive Preparation and Drowsiness Tracking Platform for Students(LMS)
 
-### Overview  
-This project provides an **Interactive Learning Management System (LMS)** integrated with a **drowsiness detection mechanism**. It is designed to enhance student engagement, track fatigue during study sessions, and ensure effective preparation for academic goals. The platform incorporates both **video streaming** and **user authentication** for personalized usage.
+Interactive preparation and drowsiness tracking platform for students.
 
----
+Drowzee is a Flask-based final-year project that combines a lightweight learning platform with webcam-based drowsiness monitoring. The goal is to help students stay engaged during preparation sessions by pairing study workflows with fatigue awareness.
 
-## Features  
-1. **Interactive LMS Platform**  
-   - User authentication: Register, login, and session management.
-   - Course management: Students access courses, resources, and learning material.
-   - Progress tracking through quizzes, assignments, and study logs.
+## Project Overview
 
-2. **Drowsiness Detection System**  
-   - Video feed from webcam to monitor student’s alertness.
-   - Uses real-time drowsiness detection algorithms to alert users if drowsiness is detected.
-   - **Audio alerts** for specific conditions (e.g., 100% drowsiness score triggers sound notification).
+The application provides a web interface for student login, preparation content, and camera-based alertness tracking. It uses OpenCV for video processing and SQLite for local persistence.
 
-3. **SQLite Database Integration**  
-   - Stores user credentials securely with **hashed passwords** using `werkzeug.security`.
-   - Tracks session details and activity logs.
+## Recruiter Notes
 
-4. **Flask-based Web App with Pyfladesk Integration**  
-   - **Web GUI** initialized using Pyfladesk to provide a desktop application-like experience.
-   - Video streaming and drowsiness tracking through the browser.
+This project demonstrates:
 
----
+- Flask application structure
+- User registration and login flow
+- SQLite-backed local persistence
+- Webcam integration with OpenCV
+- Real-time video streaming through a web interface
+- Audio alert behavior for detected drowsiness
+- Academic project delivery and documentation
 
-## Project Structure  
+## Features
+
+- Student registration and login
+- Session-based access to the learning interface
+- Webcam stream inside the web application
+- Drowsiness monitoring through camera frames
+- Audio feedback when drowsiness is detected
+- SQLite schema for local users
+- Desktop-like wrapper support through PyFladesk
+
+## Tech Stack
+
+- Python
+- Flask
+- OpenCV
+- SQLite
+- Jinja templates
+- PyFladesk
+- Werkzeug
+
+## Repository Structure
+
+```text
+.
+├── app.py              # Flask routes and application entry point
+├── camera.py           # Camera and drowsiness detection flow
+├── base_camera.py      # Streaming camera base class
+├── audiopy.py          # Audio alert logic
+├── schema.sql          # Database schema
+├── requirements.txt    # Python dependencies
+├── static/             # Static assets
+├── templates/          # HTML templates
+├── Usage.md            # Usage notes
+└── README.md
+```
+
+## Setup
+
 ```bash
-📂 Final Year Project
-│
-├── 📂 static
-│ ├── story.mp3 
-│
-├── 📂 templates
-│ ├── index.html 
-│ ├── login.html
-│ ├── register.html 
-│
-├── camera.py # Camera class for video streaming and detection
-├── audiopy.py # Audio playback logic for alerts
-├── main.py # Flask application with all routes
-├── users.db # SQLite database
-├── requirements.txt
-└── README.md 
+python -m venv .venv
+.venv\Scripts\activate
+pip install -r requirements.txt
+```
+
+## Run
+
+```bash
+python app.py
+```
+
+Open the local URL printed by Flask, usually:
+
+```text
+http://127.0.0.1:5000
+```
+
+## Notes
+
+- Webcam access is required for drowsiness tracking.
+- The project is intended as a local academic prototype.
+- Local database and cache artifacts should not be treated as production data.
+
+## Future Improvements
+
+- Add automated tests for authentication and camera-independent routes
+- Move runtime data into an ignored `instance/` directory
+- Add screenshots or a short demo recording
+- Split detection logic into a testable service module
